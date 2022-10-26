@@ -1,0 +1,225 @@
+class TreeNode
+    attr_accessor :value, :right, :left
+
+    def initialize(value)
+        @value = value
+    end
+end
+
+tree = TreeNode.new(5)
+tree.left = TreeNode.new(3)
+tree.right = TreeNode.new(8)
+
+tree.left.left = TreeNode.new(2)
+tree.left.right = TreeNode.new(1)
+
+p tree
+#<TreeNode:0x0000021d2c2b9ee0 @value=5, @left=#<TreeNode:0x0000021d2c2b9eb8 @value=3>, @right=#<TreeNode:0x0000021d2c2b9e90 @value=8>>
+
+pp tree
+
+#<TreeNode:0x000001b6c0689228
+# @left=#<TreeNode:0x000001b6c06891b0 @value=3>,
+# @right=#<TreeNode:0x000001b6c0689188 @value=8>,
+# @value=5>
+
+=begin
+Step 1: Create a class for the node and the BST
+BST is composed of nodes. Each node has a value, and two pointers point to the left and the right child. 
+We can implement a node class first:
+
+class TreeNode
+    attr_accessor :value, :left, :right
+    #node is initialized with a value, and two children are nil
+    def initialize(value)
+        @value = value
+        @left = nil
+        @right = nil
+    end
+end
+
+Now let's write a BST class:
+Recall the properties of BST: the value of the left child is less than the value itself,
+the value of the right child is greater than the value itself. That’s the pattern of inserting a new value. 
+When we see a new value, we wanna compare it with root’s value, if the new value is greater than the root’s value, 
+we go right. Otherwise, we go left.
+
+class BST
+    attr_accessor :root, :size
+    def initialize()
+        @root = nil
+        @size = 0;
+    end
+    def insert(value)
+        if @root == nil
+            @root = TreeNode.new(value)
+        else
+            curr_node = @root
+            previous_node = @root
+            #while loop helps finding the position of insertion
+            while curr_node != nil
+                previous_node = curr_node
+                if value < curr_node.value
+                    curr_node = curr_node.left
+                else
+                    curr_node = curr_node.right
+                end
+            end
+            if value < previous_node.value
+                previous_node.left = TreeNode.new(value)
+            else
+                previous_node.right = TreeNode.new(value)
+            end
+        end
+        @size += 1
+    end
+    def find_max(node = self.root)
+        if node == nil
+            return nil
+        elsif node.right == nil
+            return node
+        end
+        return find_max(node.right)
+    end
+    def find_min(node = self.root)
+        if node == nil
+            return nil
+        elsif node.left == nil
+            return node
+        end
+        return find_min(node.left)
+    end
+    def contains?(value, node = self.root)
+        if node == nil
+            return false
+        elsif value < node.value
+            return contains?(value, node.left)
+        elsif value > node.value
+            return contains?(value, node.right)
+        else
+            return true
+        end
+    end
+
+    def print_in_order(node = self.root)
+        if node != nil
+            print "("
+            print_in_order(node.left)
+            print ", #{node.value}, "
+            print_in_order(node.right)
+            print ")"
+        end
+    end
+
+    def remove(value, node = self.root)
+        removeHelper(value, node = self.root)
+        @size -= 1
+        node
+    end
+    private
+    #this helper method will avoid the multiple size decreses in recursion
+    def removeHelper(value, node = self.root)
+        if node == nil
+            return nil
+        end
+        if node.value > value
+            node.left = removeHelper(value, node.left)
+        elsif node.value < value
+            node.right = removeHelper(value, node.right)
+        else
+            if node.left != nil && node.right != nil
+                temp = node
+                min_of_right_subtree = find_min(node.right)
+                node.value = min_of_right_subtree.value
+                node.right = removeHelper(min_of_right_subtree.value, node.right)
+            elsif node.left != nil
+                node = node.left
+            elsif node.right != nil
+                node = node.right
+            else
+                node = nil
+            end
+        end
+        return node
+    end
+    def clear()
+        self.root = nil
+        self.size = 0
+    end
+    def size()
+        @size
+    end
+end
+
+
+
+bst = BST.new
+node = bst.insert(20)
+node = bst.insert(50)
+node = bst.insert(30)
+node = bst.insert(60)
+
+
+bst.print_in_order
+=end
+
+
+BiaryTree ejemplo
+class Node
+    attr_accessor :left, :right, :value
+
+    def initialize(left=nil,right=nil,value=nil)
+        self.left = left
+        self.right = right
+        self.value = value
+    end
+end
+
+class BinaryTree
+    attr_accessor :root
+
+    def initialize(node)
+        self.root = node
+    end
+
+    def find(value)
+        return true if root.value == value
+        return find_helper(root,value)
+
+    end
+
+    def find_helper(node, value)
+        return if node.nil?
+
+        return true if node.value == value
+
+        found = false
+        found = find_helper(node.left,value)
+        return found if found == true
+        return find_helper(node.right,value)
+    end
+end
+
+
+
+root = Node.new(nil,nil,1)
+child = Node.new(nil,nil,2)
+left_child_child = Node.new(nil,nil,3)
+child.left = left_child_child
+right_child_child = Node.new(nil,nil,6)
+child.right = right_child_child
+root.left = child
+bt = BinaryTree.new(root)
+
+puts bt.root.value
+puts bt.root.left.value
+puts bt.root.right
+
+puts bt.find(1)
+puts bt.find(6)
+puts bt.find(3)
+puts bt.find(4)
+
+
+
+

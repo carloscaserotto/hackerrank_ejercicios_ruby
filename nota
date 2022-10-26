@@ -1,0 +1,209 @@
+
+class TestDataEmptyArray:
+    #get_array() returns an empty array    
+    def get_array():
+        arr = [0]
+        return arr
+
+class TestDataUniqueValues:
+    #get_array() returns an array of size at least 2 with all unique elements
+    #get_expected_result() returns the expected minimum value index for this array
+    def __init__(self):
+        self.arr = [1,2]
+
+    def get_array(self):
+        return self.arr
+    def get_expected_result(self):
+        return self.arr.index(1)
+
+def minimum_index(seq):
+    if len(seq) == 0:
+        raise ValueError("Cannot get the minimum value index from an empty sequence")
+    min_idx = 0
+    for i in range(1, len(seq)):
+        if seq[i] < seq[min_idx]:
+            min_idx = i
+    return min_idx
+
+def TestWithEmptyArray():
+    try:
+        seq = TestDataEmptyArray.get_array()
+        result = minimum_index(seq)
+    except ValueError as e:
+        pass
+    else:
+        assert False
+
+def TestWithUniqueValues():
+    seq = TestDataUniqueValues.get_array()
+    assert len(seq) >= 2
+
+    assert len(list(set(seq))) == len(seq)
+
+    expected_result = TestDataUniqueValues.get_expected_result()
+    result = minimum_index(seq)
+    assert result == expected_result
+
+test = TestDataEmptyArray.get_array()
+print(test)
+#TestWithEmptyArray()
+TestWithUniqueValues()
+print("OK")
+
+
+
+
+-----------------------------------------------------------------------
+t = gets.to_i
+stdin = $stdin.read
+s = stdin.split("\n")
+s=s.each.map(&:to_i)
+#p s
+i=0
+start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+def prime(n)
+    return true if n == 1
+    i=2
+    while i<n
+        if n%i == 0
+            #puts "{n} % #{i} = #{n%i}"
+            return true
+        end
+        i+=1
+    end
+end
+
+nros_primos = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+def faster_prime(n)
+    sqr_root = Math.sqrt(n)
+    (1..sqr_root).each do |i|
+        puts i
+    end
+    
+end
+#start = Time.now
+
+s.each do |n|
+    if prime(n)
+        puts "Not Prime"
+    else
+        puts "Prime"
+    end
+end
+
+
+#finish = Time.now
+finish = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+diff = finish - start
+
+puts diff
+
+
+
+
+return "nodo vacio" if node.nil?
+        #puts "node.data: #{node.data}"
+        #puts "i: #{i}"
+        level[i] = node.data
+        #level.push(node.data)
+        puts "level: #{level}"
+        return level if node.left == nil && node.right == nil
+        if node.left != nil || node.right != nil
+            i +=1
+            levelOrder_helper(node.left,i,level)
+            i +=1
+            levelOrder_helper(node.right,i,level)
+        end
+        #if node.right != nil && node.left == nil
+        #    i +=1
+        #    levelOrder_helper(node.right,i,level)
+        #end
+        
+        return level
+def levelOrder_helper(node, size=0)
+    size_left, size_right = 0,0
+    level=[]
+    return size if node.nil?
+    puts "hola"
+    return size if node.left == nil && node.right == nil
+    size +=1
+    size_left = find_lastNode_helper(node.left,size)
+    puts "size_left: #{size_left}"
+    size_right = find_lastNode_helper(node.right,size)
+    puts "size_right: #{size_right}"
+    size = size_left
+    if size < size_right
+        size = size_right
+    end
+    return size
+    
+end
+
+class Node
+    attr_accessor :data, :next
+    def initialize(data, next_node = nil)
+        @data = data
+        @next = next_node
+    end
+end
+
+class LinkedList
+    #is_empty?: return true if the linked list is empty
+    def is_empty?
+        if @head == nil
+            return true
+        else
+            return false
+        end
+    end
+    #push: given a data, add a new node in the end
+    def push(data)
+        if self.is_empty?
+            @head = Node.new(data)
+            puts @head
+            puts @head.data
+            if @head.next == nil
+                puts "@head.next is nil"
+            end
+        else
+            current_node = @head
+            puts current_node
+            new_node = Node.new(data)
+            puts new_node
+            puts new_node.data
+            puts "current_node.next #{current_node.next}"
+            while current_node.next != nil
+                puts "entre al while"
+                current_node = current_node.next
+            end
+            current_node.next = new_node
+            puts "current_node.next #{current_node.next.data}"
+        end
+    end
+    #pretty_print: print the current linked list as an array
+    def pretty_print
+        array = []
+        current_node = @head
+        if self.is_empty?
+            return array
+        else
+            while current_node.next != nil
+                array << current_node.data
+                current_node = current_node.next
+            end
+            array << current_node.data
+       end
+       array
+    end
+    #clear: clear the whole linked list
+    def clear
+        @head = nil
+    end
+end
+
+list = LinkedList.new
+list.push(10)
+list.push(20)
+list.push(30)
+puts list.pretty_print
+

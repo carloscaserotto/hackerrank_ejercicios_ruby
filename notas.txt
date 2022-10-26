@@ -1,0 +1,444 @@
+def countingSort(array)  
+  #max =  array.count()
+  #puts max
+  n = 100
+  count = Array.new(n,0)
+  # Write your code here
+  for i in 0...array.length
+    #puts "#{array[i]} -- #{i}"
+    count[array[i]] = array.count(array[i])
+  end
+  print count
+  #puts count.length
+  return count
+end
+
+
+array = [4,2,2,8,3,3,1]
+max =  array.count()
+#puts max
+n = max+1
+count = Array.new(n,0)
+
+
+for i in 0...array.length
+  #puts "#{array[i]} -- #{i}"
+  count[array[i]] = array.count(array[i])
+end
+#puts count
+suma = count[0]
+for i in 0...count.length-1
+  #puts "#{count[i]} -- #{i}"
+  count[i+1] = count[i] + count[i+1]
+end
+#puts count
+
+output = Array.new(array.length,0)
+print output.length
+puts
+puts array.length
+puts
+print array
+puts
+puts
+print output
+puts
+for i in 0...output.length
+  puts "#{i}--#{array[i]}---#{count[array[i]]}"
+  count[array[i]] = count[array[i]]-1
+  output[count[array[i]]] = array[i]
+end
+puts output.length
+puts
+print output
+puts
+
+
+
+
+
+
+
+--------------------------------------------------------------------
+#!/bin/ruby
+
+require 'json'
+require 'stringio'
+
+#
+# Complete the 'gradingStudents' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts INTEGER_ARRAY grades as parameter.
+#
+
+def gradingStudents(grades)
+    # Write your code here
+    i=0
+    while(i < grades.length)
+      if grades[i]>40 && grades[i]<45
+        if 45 - grades[i] < 3
+          grades[i] = 45
+        end
+      end
+      if grades[i]>45 && grades[i]<50
+        if 50 - grades[i] < 3
+          grades[i] = 50
+        end
+      end
+      if grades[i]>50 && grades[i]<55
+        if 55 - grades[i] < 3
+          grades[i] = 55
+        end
+      end
+      if grades[i]>55 && grades[i]<60
+        if 60 - grades[i] < 3
+          grades[i] = 60
+        end
+      end
+      if grades[i]>60 && grades[i]<65
+        if 65 - grades[i] < 3
+          grades[i] = 65
+        end
+      end
+      if grades[i]>65 && grades[i]<70
+        if 70 - grades[i] < 3
+          grades[i] = 70
+        end
+      end
+      if grades[i]>70 && grades[i]<75
+        if 75 - grades[i] < 3
+          grades[i] = 75
+        end
+      end
+      if grades[i]>75 && grades[i]<80
+        if 80 - grades[i] < 3
+          grades[i] = 80
+        end
+      end
+      if grades[i]>80 && grades[i]<85
+        if 85 - grades[i] < 3
+          grades[i] = 85
+        end
+      end
+      if grades[i]>85 && grades[i]<90
+        if 90 - grades[i] < 3
+          grades[i] = 90
+        end
+      end
+      if grades[i]>90 && grades[i]<95
+      if 95 - grades[i] < 3
+        grades[i] = 95
+      end
+    end
+      i +=1
+    end
+    puts grades
+end
+
+fptr = File.open("nota.txt", 'w')
+
+grades_count = gets.strip.to_i
+
+grades = Array.new(grades_count)
+
+grades_count.times do |i|
+    grades_item = gets.strip.to_i
+    grades[i] = grades_item
+end
+
+result = gradingStudents grades
+
+fptr.write result.join "\n"
+fptr.write "\n"
+
+fptr.close()
+---------------------------------------------------------------------
+#!/bin/ruby
+
+require 'json'
+require 'stringio'
+
+#
+# Complete the 'divisibleSumPairs' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER n
+#  2. INTEGER k
+#  3. INTEGER_ARRAY ar
+#
+
+def divisibleSumPairs(n, k, ar)
+    # Write your code here
+
+
+end
+
+#fptr = File.open("C:\Users\carlos\Desktop\Preparacion\nota.txt", 'w')
+
+#first_multiple_input = gets.rstrip.split
+
+#n = first_multiple_input[0].to_i
+#k = first_multiple_input[1].to_i
+#ar = gets.rstrip.split.map(&:to_i)
+
+n = 4
+k = 3
+ar = [1,3,2,6,1,2]
+
+#puts ar
+sum = 0
+result = 0
+
+inc=0
+ar[0...ar.length].each_with_index do |e, i|
+  ar[i+1...ar.length].each_with_index do |j|
+  result += 1 if (e + j) % k == 0
+  end
+end
+puts result
+
+#ar[i+1...ar.length].each_with_index do |e, j|
+#  puts "#{ar[i]} + #{ar[j+1]} = #{ar[i]+ar[j+1]}"
+#  puts "#{i} + #{j+1}"
+  #puts "#{ar[i]} + #{ar[j]}"
+  #sum = ar[i]+ar[j]
+  #result += 1 if sum % k == 0
+  #sum += 1 if ar[i]+ ar[j] % k == 0
+
+
+
+
+
+
+#result = divisibleSumPairs n, k, ar
+
+#fptr.write result
+#fptr.write "\n"
+
+#fptr.close()
+
+
+--------------------------------------------------------
+#!/bin/ruby
+
+require 'json'
+require 'stringio'
+
+#
+# Complete the 'breakingRecords' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts INTEGER_ARRAY scores as parameter.
+# the words will be a camel case method,
+# class or variable name that you need to split into a space-delimited list of words starting with a lowercase letter.
+
+def camelCase(stdin)
+    # Write your code here
+    puts stdin
+    s = stdin.split(";")
+    name = s[2].gsub(/[\(\)]/, '')
+    #puts name
+    if s[0] == "S" || s[0] == "s"
+        #puts "S (split) "
+        if s[1] == "M" || s[1] == "m"
+            #puts "M indicates method"
+            name = name.split(/([[:upper:]][[:lower:]]*)/).delete_if(&:empty?).join(" ").downcase
+            puts name
+        end
+        if s[1] == "C" || s[1] == "c"
+            #puts "C indicates class"
+            name = name.split(/([[:upper:]][[:lower:]]*)/).delete_if(&:empty?).join(" ").downcase
+            puts name
+
+        end
+        if s[1] == "V" || s[1] == "v"
+            #puts "V indicates variable"
+            name = name.split(/([[:upper:]][[:lower:]]*)/).delete_if(&:empty?).join(" ").downcase
+            puts name
+        end
+     end
+     if s[0] == "C" || s[0] == "c"
+       #puts s[1]
+       if s[1] == "V" || s[1] == "v"
+         name = name.split(/ |\_|\-/)
+         temp = (1...name.length).map { |i| name[i].capitalize }.join("")
+         puts name[0].to_s+temp
+        end
+       if s[1] == "C" || s[1] == "c"
+         name = name.split(/ |\_|\-/).map(&:capitalize).join("")
+         puts name
+       end
+       if s[1] == "M" || s[1] == "m"
+         name = name.split(/ |\_|\-/).map(&:capitalize).join("")+"()"
+         puts name
+       end
+    end
+
+end
+#name = name.split(/ |\_|\-/).map(&:capitalize).join(" ")
+#stdin = "S;C;LargeSoftwareBook"
+#stdin = stdin.split(";")
+#name = stdin[2].gsub(/[\(\)]/, '')
+#name = name.split(/([[:upper:]][[:lower:]]*)/).delete_if(&:empty?).join("-")
+#puts stdin
+#puts name
+camelCase("C;M;white sheet of paper")
+#camelCase("S;C;LargeSoftwareBook")
+#camelCase("S;M;plasticCup()")
+#puts nombre = "mobile phone prankk".split(/ |\_|\-/)
+#puts temp = (1...nombre.length).map { |i| nombre[i].capitalize }.join("")
+#puts nombre[0].to_s+temp
+
+
+upperLetters = name.scan(/[A-Z]/)
+i=0
+array = []
+while(i < upperLetters.length )
+  puts upperLetters[i]
+  array = array.push(name.index("#{upperLetters[i]}"))
+  puts name.split("#{array[i]}")
+  i += 1
+end
+#puts "longitud: #{upperLetters.length}"
+#puts upperLetters
+#upperLetters.each do |l|
+#  array = array.push(name.index("#{l}"))
+#end
+#puts array
+
+
+
+#puts stdin[2].index("index1[0]")
+#puts stdin.index(upperL[0])
+
+#puts "hola-S" if stdin[0] == "S"
+#puts "hola-M" if stdin[1] == "M"
+#puts name
+stdin =~ /[A-Z]/
+#puts name[0..index-1]+" "+name[index..name.length]
+
+def converCamelCase (stdin)
+  stdin = stdin.split(";")
+  upperL = stdin[2].scan(/[A-Z]/)
+  puts "longitud: #{upperL.length}"
+  #puts stdin
+  puts stdin[2]
+  index1 = stdin[2].scan(/[A-Z]/)
+  puts index1[0]
+  puts stdin[2].index("index1[0]")
+  #puts stdin.index(upperL[0])
+
+  #puts "hola-S" if stdin[0] == "S"
+  #puts "hola-M" if stdin[1] == "M"
+  name = stdin[2]
+  name = name.gsub(/[\(\)]/, '')
+  #puts name
+  index = stdin[2] =~ /[A-Z]/
+  return name[0..index-1]+" "+name[index..name.length]
+end
+
+converCamelCase("S;C;LargeSoftwareBook")
+
+def detectUppercase(stdin)
+    return stdin.scan(/[A-Z]/)
+end
+
+
+m1 = /[A-Z]/.match("plasticCup")
+m1 = m1.to_s
+puts stdin[2] =~ /[A-Z]/
+puts m1
+puts "plasticCup".index(m1)
+full_name = "plasticCup"
+name1 = full_name.split(/[A-Z]/)
+puts name1
+
+
+Given a time in -hour AM/PM format, convert it to military (24-hour) time.
+
+Note: - 12:00:00AM on a 12-hour clock is 00:00:00 on a 24-hour clock.
+- 12:00:00PM on a 12-hour clock is 12:00:00 on a 24-hour clock.
+
+#!/bin/ruby
+
+require 'json'
+require 'stringio'
+
+#
+# Complete the 'timeConversion' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts STRING s as parameter.
+#
+
+def timeConversion(s)
+    # Write your code here
+    hour = s[-2..-1]
+    horario = s.split(":")
+
+    if hour == "PM" || hour == "pm"
+        temp = horario[0].to_i
+        temp = temp + 12
+        horario[0] = temp.to_s
+        puts horario[0]+":"+horario[1]+":"+horario[2][0..1]
+    end
+    if hour == "AM" || hour == "am"
+        if horario[0] == "12"
+            puts "00"+":"+horario[1]+":"+horario[2][0..1]
+        elsif puts horario[0]+":"+horario[1]+":"+horario[2][0..1]
+        end
+    end
+
+end
+
+fptr = File.open("C:\Users\carlos\Desktop\Preparacion", 'w')
+
+s = gets.chomp
+
+result = timeConversion s
+
+fptr.write result
+fptr.write "\n"
+
+fptr.close()
+
+
+
+
+#puts "this is some string".scan(/\w+/)
+
+#puts "05:50:45AM".scan(/\d{2}\:\d{2}\:\d{2}\w+/)
+
+#puts "05:50:45AM".match(/AM/)
+#puts "05:50:45PM".match(/PM/)
+
+#puts "05:50:45PM".match(/\d\d\:/)
+#puts "05:50:45PM".match(/\d\d\:\d\d\:/)
+#puts "05:50:45PM".match(/\:\d\d\w+/)
+
+horas = "05:50:45PM".match(/\d\d\:/)
+minutos = "05:50:45PM".match(/\d\d\:/)
+segundos = "05:50:45PM".match(/\d\d\:/)
+dia = "05:50:45PM".match(/\w+/)
+#puts "horas: ", horas
+#puts "minutos: ", minutos
+#puts "segundos: ",segundos
+#puts "dia: ",dia
+
+horario = "05:50:45PM".split(":")
+#puts horario
+hora = horario[0].to_i
+min = horario[1].to_i
+seg = horario[2]
+dia = seg.match(/\w+/)
+puts "hora: #{hora} min: #{min}"
+puts "seg: #{seg}"
+puts "segundos: #{segundos}"
+puts "dia: #{dia}"
+
+seg_sep = seg.match(/\d\d/)
+puts seg_sep
+temp = seg_sep.to_s
+segundos = temp.to_i
